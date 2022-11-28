@@ -4,31 +4,47 @@ import com.kerrrusha.chessboard.factory.ChessPieceFactory;
 import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChessBoardTest {
 
     @Test
     public void toStringTest() {
-        final String expected = " Q  0  0  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  Q  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  Q  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  0  0  0  0  0 "+System.lineSeparator() +
-                " 0  0  0  0  0  0  0  0 "+System.lineSeparator();
+        final String expected = " Q  -  -  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  Q  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  Q  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  -  -  -  -  - "+System.lineSeparator() +
+                " -  -  -  -  -  -  -  - "+System.lineSeparator();
 
-        ChessPiece a = ChessPieceFactory.createQueen(0, 0);
-        ChessPiece b = ChessPieceFactory.createQueen(2, 5);
-        ChessPiece c = ChessPieceFactory.createQueen(3, 3);
+        final Collection<ChessPiece> chessPieces = Arrays.asList(
+                ChessPieceFactory.createQueen(0, 0),
+                ChessPieceFactory.createQueen(2, 5),
+                ChessPieceFactory.createQueen(3, 3)
+        );
 
         ChessBoard board = new ChessBoard();
-        board.addChessPiece(a);
-        board.addChessPiece(b);
-        board.addChessPiece(c);
+        chessPieces.forEach(board::addChessPiece);
 
         assertEquals(expected, board.toString());
     }
 
+    @Test
+    public void boardOverloadTest() {
+        ChessBoard board = new ChessBoard();
+        for (int i = 0; i < board.getSize(); i++) {
+            for (int j = 0; j < board.getSize(); j++) {
+                board.addChessPiece(ChessPieceFactory.createQueen(i, j));
+            }
+        }
+
+        final int currentSize = board.getCurrentChessCount();
+        board.addChessPiece(ChessPieceFactory.createQueen(0,0));
+        assertEquals(currentSize, board.getCurrentChessCount());
+    }
 }

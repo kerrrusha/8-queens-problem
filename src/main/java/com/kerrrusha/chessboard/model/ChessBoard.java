@@ -10,7 +10,7 @@ import static com.kerrrusha.chessboard.model.PseudographicSymbol.EMPTY_CELL_SYMB
 
 public class ChessBoard {
 
-    private static final Logger logger = Logger.getLogger(ChessBoard.class);;
+    private static final Logger logger = Logger.getLogger(ChessBoard.class);
 
     private final int SIZE = 8;
 
@@ -21,19 +21,48 @@ public class ChessBoard {
     }
 
     public void addChessPiece(ChessPiece chessPiece) {
-        if (isFull() || !cellIsEmpty(chessPiece.getCoords())) {
-            logger.warn("Can't add chesspiece "+chessPiece+" to the board - it's full or the cell isn't empty.");
+        if (!canAddSuchChessPiece(chessPiece)) {
+            logger.warn("Can't add chesspiece "+chessPiece+" to the board - it's full, cell isn't empty or the chesspiece has invalid coords.");
             return;
         }
         chessPieces.add(chessPiece);
+    }
+
+    private boolean canAddSuchChessPiece(ChessPiece chessPiece) {
+        return chessPieceCoordsIsCorrect(chessPiece) && cellIsEmpty(chessPiece.getCoords()) && !isFull();
+    }
+
+    private boolean chessPieceCoordsIsCorrect(ChessPiece chessPiece) {
+        return chessPiece.getCoords().x >= 0 && chessPiece.getCoords().x < SIZE &&
+                chessPiece.getCoords().y >= 0 && chessPiece.getCoords().y < SIZE;
+    }
+
+    public void removeChessPiece(ChessPiece chessPiece) {
+        if (!contains(chessPiece)) {
+            logger.warn("There are such chesspiece: "+chessPiece);
+            return;
+        }
+        chessPieces.remove(chessPiece);
+    }
+
+    private boolean contains(ChessPiece chessPiece) {
+        return chessPieces.contains(chessPiece);
     }
 
     public Collection<ChessPiece> getChessPieces() {
         return chessPieces;
     }
 
+    public int getSize() {
+        return SIZE;
+    }
+
+    public int getCurrentChessCount() {
+        return chessPieces.size();
+    }
+
     private boolean isFull() {
-        return chessPieces.size() >= SIZE*SIZE;
+        return getCurrentChessCount() >= SIZE*SIZE;
     }
 
     private boolean cellIsEmpty(Coordinate coords) {
