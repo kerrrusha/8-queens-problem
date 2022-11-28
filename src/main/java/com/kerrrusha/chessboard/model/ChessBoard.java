@@ -65,7 +65,7 @@ public class ChessBoard {
         return getCurrentChessCount() >= SIZE*SIZE;
     }
 
-    private boolean cellIsEmpty(Coordinate coords) {
+    public boolean cellIsEmpty(Coordinate coords) {
         return chessPieces.stream().noneMatch(chessPiece -> chessPiece.getCoords().equals(coords));
     }
 

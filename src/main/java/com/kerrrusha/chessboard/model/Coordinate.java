@@ -7,6 +7,10 @@ public class Coordinate {
     public int x;
     public int y;
 
+    public Coordinate(Coordinate other) {
+        setValue(other);
+    }
+
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
