@@ -24,7 +24,6 @@ public class NQueenProblemSolver {
         for (int i = 0; i < board.getSize(); i++) {
             ChessPiece queen = ChessPieceFactory.createQueen(i, col);
 
-            //if it is safe to place the queen at position i,col -> place it
             if (analyzer.isInSafe(queen)) {
                 board.addChessPiece(queen);
 
@@ -32,7 +31,6 @@ public class NQueenProblemSolver {
                     return true;
                 }
 
-                //backtrack if the above condition is false
                 board.removeChessPiece(queen);
             }
         }
