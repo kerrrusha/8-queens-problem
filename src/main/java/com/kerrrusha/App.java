@@ -13,6 +13,5 @@ public class App {
 
         System.out.println(solver.getBoard());
         System.out.println(solver.getTracker());
-        System.out.println(solver.getStateTree());
     }
 }
