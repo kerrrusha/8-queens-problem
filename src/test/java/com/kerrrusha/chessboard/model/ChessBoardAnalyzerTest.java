@@ -16,11 +16,11 @@ public class ChessBoardAnalyzerTest {
     @Test
     public void getChessPiecesUnderAttackDefaultTest() {
         final Collection<ChessPiece> chessPieces = Arrays.asList(
-                ChessPieceFactory.createQueen(1, 1),
-                ChessPieceFactory.createQueen(5, 1),
-                ChessPieceFactory.createQueen(3, 3),
-                ChessPieceFactory.createQueen(0, 4),
-                ChessPieceFactory.createQueen(7, 6)
+                ChessPieceFactory.getInstance(1, 1),
+                ChessPieceFactory.getInstance(5, 1),
+                ChessPieceFactory.getInstance(3, 3),
+                ChessPieceFactory.getInstance(0, 4),
+                ChessPieceFactory.getInstance(7, 6)
         );
         final int expectedUnderAttackResults = 6;
 
@@ -38,9 +38,9 @@ public class ChessBoardAnalyzerTest {
     @Test
     public void getChessPiecesUnderAttackMultipleChessOnOneLineTest() {
         final Collection<ChessPiece> chessPieces = Arrays.asList(
-                ChessPieceFactory.createQueen(1, 1),
-                ChessPieceFactory.createQueen(3, 3),
-                ChessPieceFactory.createQueen(5, 5)
+                ChessPieceFactory.getInstance(1, 1),
+                ChessPieceFactory.getInstance(3, 3),
+                ChessPieceFactory.getInstance(5, 5)
         );
         final int expectedUnderAttackResults = 4;
 

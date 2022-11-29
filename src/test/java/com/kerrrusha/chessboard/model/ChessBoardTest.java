@@ -23,9 +23,9 @@ class ChessBoardTest {
                 " -  -  -  -  -  -  -  - "+System.lineSeparator();
 
         final Collection<ChessPiece> chessPieces = Arrays.asList(
-                ChessPieceFactory.createQueen(0, 0),
-                ChessPieceFactory.createQueen(2, 5),
-                ChessPieceFactory.createQueen(3, 3)
+                ChessPieceFactory.getInstance(0, 0),
+                ChessPieceFactory.getInstance(2, 5),
+                ChessPieceFactory.getInstance(3, 3)
         );
 
         ChessBoard board = new ChessBoard();
@@ -39,12 +39,12 @@ class ChessBoardTest {
         ChessBoard board = new ChessBoard();
         for (int i = 0; i < board.getSize(); i++) {
             for (int j = 0; j < board.getSize(); j++) {
-                board.addChessPiece(ChessPieceFactory.createQueen(i, j));
+                board.addChessPiece(ChessPieceFactory.getInstance(i, j));
             }
         }
 
         final int currentSize = board.getCurrentChessCount();
-        board.addChessPiece(ChessPieceFactory.createQueen(0,0));
+        board.addChessPiece(ChessPieceFactory.getInstance(0,0));
         assertEquals(currentSize, board.getCurrentChessCount());
     }
 }

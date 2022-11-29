@@ -1,6 +1,7 @@
 package com.kerrrusha.nqueenproblem;
 
 import com.kerrrusha.chessboard.analyzer.ChessBoardAnalyzer;
+import com.kerrrusha.chessboard.factory.ChessBoardFactory;
 import com.kerrrusha.chessboard.factory.ChessPieceFactory;
 import com.kerrrusha.chessboard.model.ChessBoard;
 import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
@@ -9,13 +10,14 @@ public class NQueenProblemSolver {
 
     private final ChessBoard board;
     private final ChessBoardAnalyzer analyzer;
-
-    private final AlgorithmStatTracker tracker;
+    private final ChessBoardStateTree stateTree;
+    private final AlgorithmNQueenStatTracker tracker;
 
     public NQueenProblemSolver() {
         board = new ChessBoard();
         analyzer = new ChessBoardAnalyzer(board);
-        tracker = new AlgorithmStatTracker();
+        stateTree = new ChessBoardStateTree();
+        tracker = new AlgorithmNQueenStatTracker();
     }
 
     public boolean solveNQueen(int col)
@@ -25,8 +27,9 @@ public class NQueenProblemSolver {
         }
 
         getTracker().addStep();
+        stateTree.addNode(ChessBoardFactory.getCopy(board));
         for (int i = 0; i < board.getSize(); i++) {
-            ChessPiece queen = ChessPieceFactory.createQueen(i, col);
+            ChessPiece queen = ChessPieceFactory.getInstance(i, col);
 
             if (analyzer.isInSafe(queen)) {
                 board.addChessPiece(queen);
@@ -35,6 +38,7 @@ public class NQueenProblemSolver {
                     return true;
                 }
 
+                getTracker().addBacktrack();
                 board.removeChessPiece(queen);
             }
         }
@@ -45,7 +49,11 @@ public class NQueenProblemSolver {
         return board;
     }
 
-    public AlgorithmStatTracker getTracker() {
+    public AlgorithmNQueenStatTracker getTracker() {
         return tracker;
+    }
+
+    public ChessBoardStateTree getStateTree() {
+        return stateTree;
     }
 }

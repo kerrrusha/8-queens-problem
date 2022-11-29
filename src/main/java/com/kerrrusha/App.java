@@ -12,7 +12,7 @@ public class App {
         solver.getTracker().stop();
 
         System.out.println(solver.getBoard());
-        System.out.println(solver.getTracker().getSteps() + " steps");
-        System.out.println(solver.getTracker().getTimeElapsedMillis() + " ms");
+        System.out.println(solver.getTracker());
+        System.out.println(solver.getStateTree());
     }
 }

@@ -6,18 +6,21 @@ import java.util.concurrent.TimeUnit;
 
 public class AlgorithmStatTracker {
 
-    private int steps;
+    private int steps = 0;
     private final Stopwatch stopwatch;
 
     public AlgorithmStatTracker() {
-        steps = 0;
         stopwatch = Stopwatch.createUnstarted();
     }
 
     public void start() {
+        reset();
+        stopwatch.start();
+    }
+
+    protected void reset() {
         steps = 0;
         stopwatch.reset();
-        stopwatch.start();
     }
 
     protected void addStep() {
@@ -34,5 +37,11 @@ public class AlgorithmStatTracker {
 
     public long getTimeElapsedMillis() {
         return stopwatch.elapsed(TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public String toString() {
+        return getSteps() + " steps" + System.lineSeparator() +
+                getTimeElapsedMillis() + " ms" + System.lineSeparator();
     }
 }
