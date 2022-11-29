@@ -5,6 +5,8 @@ import com.kerrrusha.chessboard.factory.ChessBoardFactory;
 import com.kerrrusha.chessboard.factory.ChessPieceFactory;
 import com.kerrrusha.chessboard.model.ChessBoard;
 import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
+import com.kerrrusha.nqueenproblem.stat.AlgorithmNQueenStatTracker;
+import com.kerrrusha.nqueenproblem.stat.statetree.ChessBoardStateTree;
 
 public class NQueenProblemSolver {
 

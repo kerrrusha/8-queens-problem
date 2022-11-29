@@ -1,4 +1,4 @@
-package com.kerrrusha.nqueenproblem;
+package com.kerrrusha.nqueenproblem.stat;
 
 public class AlgorithmNQueenStatTracker extends AlgorithmStatTracker {
 
@@ -10,7 +10,7 @@ public class AlgorithmNQueenStatTracker extends AlgorithmStatTracker {
         super.reset();
     }
 
-    protected void addBacktrack() {
+    public void addBacktrack() {
         backtracksCount += 1;
     }
 

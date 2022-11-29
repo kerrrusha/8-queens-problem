@@ -1,4 +1,4 @@
-package com.kerrrusha.nqueenproblem;
+package com.kerrrusha.nqueenproblem.stat;
 
 import com.google.common.base.Stopwatch;
 
@@ -23,7 +23,7 @@ public class AlgorithmStatTracker {
         stopwatch.reset();
     }
 
-    protected void addStep() {
+    public void addStep() {
         steps += 1;
     }
 

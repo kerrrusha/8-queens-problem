@@ -1,4 +1,4 @@
-package com.kerrrusha.nqueenproblem;
+package com.kerrrusha.nqueenproblem.stat.statetree;
 
 import com.kerrrusha.chessboard.model.ChessBoard;
 

@@ -1,6 +1,6 @@
 package com.kerrrusha.chessboard.model;
 
-import com.kerrrusha.nqueenproblem.AlgorithmStatTracker;
+import com.kerrrusha.nqueenproblem.stat.AlgorithmStatTracker;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
