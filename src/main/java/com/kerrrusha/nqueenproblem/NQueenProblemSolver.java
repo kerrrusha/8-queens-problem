@@ -1,7 +1,6 @@
 package com.kerrrusha.nqueenproblem;
 
 import com.kerrrusha.chessboard.analyzer.ChessBoardAnalyzer;
-import com.kerrrusha.chessboard.factory.ChessBoardFactory;
 import com.kerrrusha.chessboard.factory.ChessPieceFactory;
 import com.kerrrusha.chessboard.model.ChessBoard;
 import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
@@ -29,7 +28,7 @@ public class NQueenProblemSolver {
         }
 
         getTracker().addStep();
-        stateTree.addNode(ChessBoardFactory.getCopy(board));
+        //stateTree.addNode(ChessBoardFactory.getCopy(board));
         for (int i = 0; i < board.getSize(); i++) {
             ChessPiece queen = ChessPieceFactory.getInstance(i, col);
 

@@ -1,8 +1,11 @@
-package com.kerrrusha.nqueenproblem.stat.statetree;
+package com.kerrrusha.nqueenproblem.stat.statetree.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toSet;
 
 public class Node<T> {
 
@@ -39,6 +42,15 @@ public class Node<T> {
                 .sum();
 
         return result;
+    }
+
+    public Collection<Node<T>> getAllSubNodes() {
+        Collection<Node<T>> nodes = new ArrayList<>(List.of(this));
+        nodes.addAll(getChildrens().stream()
+                .map(Node::getAllSubNodes)
+                .flatMap(Collection::stream)
+                .collect(toSet()));
+        return nodes;
     }
 
     public Optional<Node<T>> findChild(int id) {

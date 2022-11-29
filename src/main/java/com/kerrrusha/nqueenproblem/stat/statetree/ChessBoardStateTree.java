@@ -1,22 +1,13 @@
 package com.kerrrusha.nqueenproblem.stat.statetree;
 
 import com.kerrrusha.chessboard.model.ChessBoard;
+import com.kerrrusha.nqueenproblem.stat.statetree.util.Node;
+import com.kerrrusha.nqueenproblem.stat.statetree.util.Tree;
 
-import java.util.ArrayList;
-import java.util.Collection;
+public class ChessBoardStateTree extends Tree<ChessBoard> {
 
-public class ChessBoardStateTree {
-
-    private final Collection<ChessBoard> tree = new ArrayList<>();
-
-    public void addNode(ChessBoard node) {
-        tree.add(node);
-    }
-
-    @Override
-    public String toString() {
-        return "ChessBoardStateTree{" +
-                "tree=" + tree +
-                '}';
+    public ChessBoardStateTree() {}
+    public ChessBoardStateTree(ChessBoard rootData) {
+        root = new Node<>(rootData);
     }
 }

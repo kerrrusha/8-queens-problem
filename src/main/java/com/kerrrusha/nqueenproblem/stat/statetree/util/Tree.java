@@ -1,12 +1,15 @@
-package com.kerrrusha.nqueenproblem.stat.statetree;
+package com.kerrrusha.nqueenproblem.stat.statetree.util;
 
+import java.util.Collection;
 import java.util.Optional;
 
-import static com.kerrrusha.nqueenproblem.stat.statetree.Node.UNKNOWN_ID;
+import static com.kerrrusha.nqueenproblem.stat.statetree.util.Node.UNKNOWN_ID;
 
 public class Tree<T> {
 
-    private final Node<T> root;
+    protected Node<T> root;
+
+    public Tree() {}
 
     public Tree(T rootData) {
         root = new Node<>(rootData);
@@ -14,6 +17,14 @@ public class Tree<T> {
 
     public Node<T> getRoot() {
         return root;
+    }
+
+    public int initRootNode(T nodeData) {
+        if (root != null) {
+            return UNKNOWN_ID;
+        }
+        root = new Node<>(nodeData);
+        return root.getId();
     }
 
     public int addNode(int parentId, T nodeData) {
@@ -34,5 +45,9 @@ public class Tree<T> {
 
     public int size() {
         return root.getSubNodesCount();
+    }
+
+    public Collection<Node<T>> getAllNodes() {
+        return root.getAllSubNodes();
     }
 }
