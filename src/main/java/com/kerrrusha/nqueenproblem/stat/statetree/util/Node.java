@@ -3,7 +3,6 @@ package com.kerrrusha.nqueenproblem.stat.statetree.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -51,18 +50,6 @@ public class Node<T> {
                 .flatMap(Collection::stream)
                 .collect(toSet()));
         return nodes;
-    }
-
-    public Optional<Node<T>> findChild(int id) {
-        if (getParent() != null && getParent().getId() == id) {
-            return Optional.of(getParent());
-        }
-        if (getId() == id) {
-            return Optional.of(this);
-        }
-        return getChildrens().stream()
-                .filter(node -> node.getId() == id)
-                .findFirst();
     }
 
     public int getId() {

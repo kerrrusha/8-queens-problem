@@ -40,7 +40,9 @@ public class Tree<T> {
     }
 
     public Optional<Node<T>> findNode(int id) {
-        return root.findChild(id);
+        return getAllNodes().stream()
+                .filter(node -> node.getId() == id)
+                .findFirst();
     }
 
     public int size() {
