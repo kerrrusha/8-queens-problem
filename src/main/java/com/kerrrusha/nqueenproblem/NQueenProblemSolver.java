@@ -10,9 +10,12 @@ public class NQueenProblemSolver {
     private final ChessBoard board;
     private final ChessBoardAnalyzer analyzer;
 
+    private final AlgorithmStatTracker tracker;
+
     public NQueenProblemSolver() {
         board = new ChessBoard();
         analyzer = new ChessBoardAnalyzer(board);
+        tracker = new AlgorithmStatTracker();
     }
 
     public boolean solveNQueen(int col)
@@ -21,6 +24,7 @@ public class NQueenProblemSolver {
             return true;
         }
 
+        getTracker().addStep();
         for (int i = 0; i < board.getSize(); i++) {
             ChessPiece queen = ChessPieceFactory.createQueen(i, col);
 
@@ -39,5 +43,9 @@ public class NQueenProblemSolver {
 
     public ChessBoard getBoard() {
         return board;
+    }
+
+    public AlgorithmStatTracker getTracker() {
+        return tracker;
     }
 }
