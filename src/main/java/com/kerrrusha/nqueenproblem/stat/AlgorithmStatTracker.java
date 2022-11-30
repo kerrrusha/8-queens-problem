@@ -41,7 +41,7 @@ public class AlgorithmStatTracker {
 
     @Override
     public String toString() {
-        return getSteps() + " steps" + System.lineSeparator() +
+        return getSteps() + " nodes was created" + System.lineSeparator() +
                 getTimeElapsedMillis() + " ms" + System.lineSeparator();
     }
 }

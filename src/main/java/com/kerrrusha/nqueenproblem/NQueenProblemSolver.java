@@ -15,18 +15,21 @@ public class NQueenProblemSolver {
     private final ChessBoardStateTree stateTree;
     private final AlgorithmNQueenStatTracker tracker;
 
+    private int[] colsStartRowValues;
+
     public NQueenProblemSolver() {
         board = new ChessBoard();
         analyzer = new ChessBoardAnalyzer(board);
         stateTree = new ChessBoardStateTree();
         tracker = new AlgorithmNQueenStatTracker();
+        colsStartRowValues = new int[board.getSize()];
     }
 
     public boolean solveNQueen(int col)
     {
         getStateTree().reset();
-        getStateTree().initRootNode(ChessBoardFactory.getEmpty());
-        return solveNQueen(col, 1);
+        int rootId = getStateTree().initRootNode(ChessBoardFactory.getEmpty());
+        return solveNQueen(col, rootId);
     }
 
     private boolean solveNQueen(int col, int lastNodeId)
@@ -37,7 +40,7 @@ public class NQueenProblemSolver {
 
         getTracker().addStep();
         int createdNodeId = getStateTree().addNode(lastNodeId, ChessBoardFactory.getCopy(board));
-        for (int i = 0; i < board.getSize(); i++) {
+        for (int i = getStartRow(col); i < board.getSize(); i++) {
             ChessPiece queen = ChessPieceFactory.getInstance(i, col);
 
             if (analyzer.isInSafe(queen)) {
@@ -52,6 +55,14 @@ public class NQueenProblemSolver {
             }
         }
         return false;
+    }
+
+    public void setColsStartRowValues(int[] colsStartRowValues) {
+        this.colsStartRowValues = colsStartRowValues;
+    }
+
+    private int getStartRow(int col) {
+        return colsStartRowValues[col];
     }
 
     public ChessBoard getBoard() {

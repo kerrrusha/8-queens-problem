@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toCollection;
 
 public class Node<T> {
 
@@ -48,7 +48,7 @@ public class Node<T> {
         nodes.addAll(getChildrens().stream()
                 .map(Node::getAllSubNodes)
                 .flatMap(Collection::stream)
-                .collect(toSet()));
+                .collect(toCollection(ArrayList::new)));
         return nodes;
     }
 
