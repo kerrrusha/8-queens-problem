@@ -1,6 +1,7 @@
 package com.kerrrusha;
 
 import com.kerrrusha.nqueenproblem.NQueenProblemSolver;
+import com.kerrrusha.nqueenproblem.stat.statetree.StateTreeView;
 
 public class App {
 
@@ -13,5 +14,6 @@ public class App {
 
         System.out.println(solver.getBoard());
         System.out.println(solver.getTracker());
+        new StateTreeView<>(solver.getStateTree()).display();
     }
 }

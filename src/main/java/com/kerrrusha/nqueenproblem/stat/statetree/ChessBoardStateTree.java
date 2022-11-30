@@ -10,4 +10,8 @@ public class ChessBoardStateTree extends Tree<ChessBoard> {
     public ChessBoardStateTree(ChessBoard rootData) {
         root = new Node<>(rootData);
     }
+
+    public void reset() {
+        root = null;
+    }
 }

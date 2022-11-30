@@ -14,6 +14,10 @@ public class ChessBoardFactory {
         return board;
     }
 
+    public static ChessBoard getEmpty() {
+        return new ChessBoard();
+    }
+
     public static ChessBoard getRandom() {
         final ChessBoard board = new ChessBoard();
         for (int i = 0; i < board.getSize(); i++) {
