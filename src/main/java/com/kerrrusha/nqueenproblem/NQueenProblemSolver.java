@@ -25,14 +25,14 @@ public class NQueenProblemSolver {
         colsStartRowValues = new int[board.getSize()];
     }
 
-    public boolean solveNQueen(int col)
+    public boolean doRBFSAlgorithm(int col)
     {
         getStateTree().reset();
         int rootId = getStateTree().initRootNode(ChessBoardFactory.getEmpty());
-        return solveNQueen(col, rootId);
+        return doRBFSAlgorithm(col, rootId);
     }
 
-    private boolean solveNQueen(int col, int lastNodeId)
+    private boolean doRBFSAlgorithm(int col, int lastNodeId)
     {
         if (col >= board.getSize()) {
             return true;
@@ -46,7 +46,7 @@ public class NQueenProblemSolver {
             if (analyzer.isInSafe(queen)) {
                 board.addChessPiece(queen);
 
-                if (solveNQueen(col + 1, createdNodeId)) {
+                if (doRBFSAlgorithm(col + 1, createdNodeId)) {
                     return true;
                 }
 

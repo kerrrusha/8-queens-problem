@@ -11,7 +11,7 @@ public class NQueenProblemSolverTest {
     @Test
     public void solveNQueenSolvedTest() {
         final NQueenProblemSolver solver = new NQueenProblemSolver();
-        final boolean solved = solver.solveNQueen(0);
+        final boolean solved = solver.doRBFSAlgorithm(0);
 
         System.out.println(solver.getBoard());
         assertTrue(solved);
@@ -20,7 +20,7 @@ public class NQueenProblemSolverTest {
     @Test
     public void solveNQueenNoUnderAttackTest() {
         final NQueenProblemSolver solver = new NQueenProblemSolver();
-        solver.solveNQueen(0);
+        solver.doRBFSAlgorithm(0);
 
         System.out.println(solver.getBoard());
         assertTrue(new ChessBoardAnalyzer(solver.getBoard()).getChessPiecesUnderAttack().isEmpty());

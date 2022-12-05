@@ -32,7 +32,7 @@ public class App {
         solver.setColsStartRowValues(colsStartRowValues);
 
         solver.getTracker().start();
-        solver.solveNQueen(0);
+        solver.doRBFSAlgorithm(0);
         solver.getTracker().stop();
 
         System.out.println(solver.getBoard());
