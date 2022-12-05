@@ -6,8 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 public class AlgorithmStatTracker {
 
-    private int steps = 0;
-    private final Stopwatch stopwatch;
+    protected int steps = 0;
+    protected long timeElapsedMillis = 0;
+    protected Stopwatch stopwatch;
 
     public AlgorithmStatTracker() {
         stopwatch = Stopwatch.createUnstarted();
@@ -20,6 +21,7 @@ public class AlgorithmStatTracker {
 
     protected void reset() {
         steps = 0;
+        timeElapsedMillis = 0;
         stopwatch.reset();
     }
 
@@ -29,6 +31,7 @@ public class AlgorithmStatTracker {
 
     public void stop() {
         stopwatch.stop();
+        timeElapsedMillis = stopwatch.elapsed(TimeUnit.MILLISECONDS);
     }
 
     public int getSteps() {
@@ -36,7 +39,7 @@ public class AlgorithmStatTracker {
     }
 
     public long getTimeElapsedMillis() {
-        return stopwatch.elapsed(TimeUnit.MILLISECONDS);
+        return timeElapsedMillis;
     }
 
     @Override
