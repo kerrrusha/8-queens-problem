@@ -8,10 +8,6 @@ import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
 import com.kerrrusha.nqueenproblem.stat.AlgorithmNQueenStatTracker;
 import com.kerrrusha.nqueenproblem.stat.statetree.ChessBoardStateTree;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-
 public class NQueenProblemSolver {
 
     private final ChessBoard board;
@@ -62,11 +58,7 @@ public class NQueenProblemSolver {
     }
 
     public int[] getSolvedState() {
-        Collection<Integer> rows = new ArrayList<>();
-        board.getChessPieces().stream()
-                .sorted(Comparator.comparingInt(p -> p.getCoords().x))
-                .forEach(chessPiece -> rows.add(chessPiece.getCoords().y));
-        return rows.stream().mapToInt(x -> x).toArray();
+        return board.getState();
     }
 
     public void setInitState(int[] initState) {
@@ -83,6 +75,10 @@ public class NQueenProblemSolver {
 
     public AlgorithmNQueenStatTracker getTracker() {
         return tracker;
+    }
+
+    public AlgorithmNQueenStatTracker getTrackerCopy() {
+        return new AlgorithmNQueenStatTracker(tracker);
     }
 
     public ChessBoardStateTree getStateTree() {
