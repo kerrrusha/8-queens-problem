@@ -8,6 +8,10 @@ import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
 import com.kerrrusha.nqueenproblem.stat.AlgorithmNQueenStatTracker;
 import com.kerrrusha.nqueenproblem.stat.statetree.ChessBoardStateTree;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+
 public class NQueenProblemSolver {
 
     private final ChessBoard board;
@@ -15,14 +19,14 @@ public class NQueenProblemSolver {
     private final ChessBoardStateTree stateTree;
     private final AlgorithmNQueenStatTracker tracker;
 
-    private int[] colsStartRowValues;
+    private int[] initState;
 
     public NQueenProblemSolver() {
         board = new ChessBoard();
         analyzer = new ChessBoardAnalyzer(board);
         stateTree = new ChessBoardStateTree();
         tracker = new AlgorithmNQueenStatTracker();
-        colsStartRowValues = new int[board.getSize()];
+        initState = new int[board.getSize()];
     }
 
     public boolean doRBFSAlgorithm(int col)
@@ -40,7 +44,7 @@ public class NQueenProblemSolver {
 
         getTracker().addStep();
         int createdNodeId = getStateTree().addNode(lastNodeId, ChessBoardFactory.getCopy(board));
-        for (int i = getStartRow(col); i < board.getSize(); i++) {
+        for (int i = getInitState(col); i < board.getSize(); i++) {
             ChessPiece queen = ChessPieceFactory.getInstance(i, col);
 
             if (analyzer.isInSafe(queen)) {
@@ -57,12 +61,20 @@ public class NQueenProblemSolver {
         return false;
     }
 
-    public void setColsStartRowValues(int[] colsStartRowValues) {
-        this.colsStartRowValues = colsStartRowValues;
+    public int[] getSolvedState() {
+        Collection<Integer> rows = new ArrayList<>();
+        board.getChessPieces().stream()
+                .sorted(Comparator.comparingInt(p -> p.getCoords().x))
+                .forEach(chessPiece -> rows.add(chessPiece.getCoords().y));
+        return rows.stream().mapToInt(x -> x).toArray();
     }
 
-    private int getStartRow(int col) {
-        return colsStartRowValues[col];
+    public void setInitState(int[] initState) {
+        this.initState = initState;
+    }
+
+    private int getInitState(int col) {
+        return initState[col];
     }
 
     public ChessBoard getBoard() {

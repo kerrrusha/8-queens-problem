@@ -4,7 +4,9 @@ import com.kerrrusha.chessboard.analyzer.ChessBoardAnalyzer;
 import com.kerrrusha.nqueenproblem.NQueenProblemSolver;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NQueenProblemSolverTest {
 
@@ -24,5 +26,16 @@ public class NQueenProblemSolverTest {
 
         System.out.println(solver.getBoard());
         assertTrue(new ChessBoardAnalyzer(solver.getBoard()).getChessPiecesUnderAttack().isEmpty());
+    }
+
+    @Test
+    public void getSolvedStateTest() {
+        final NQueenProblemSolver solver = new NQueenProblemSolver();
+        solver.doRBFSAlgorithm(0);
+
+        System.out.println(solver.getBoard());
+        System.out.println(Arrays.toString(solver.getSolvedState()));
+
+        assertArrayEquals(new int[]{0, 6, 4, 7, 1, 3, 5, 2}, solver.getSolvedState());
     }
 }
