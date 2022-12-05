@@ -2,7 +2,9 @@ package com.kerrrusha.chessboard.model;
 
 import com.kerrrusha.chessboard.model.chesspiece.ChessPiece;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import org.apache.log4j.Logger;
 
@@ -96,5 +98,17 @@ public class ChessBoard {
         return SIZE * EMPTY_CELL_SYMBOL.length() * chessPiece.getCoords().y
                 + chessPiece.getCoords().y * System.lineSeparator().length()
                 + chessPiece.getCoords().x * EMPTY_CELL_SYMBOL.length();
+    }
+
+    public int[] getState() {
+        Collection<Integer> rows = new ArrayList<>();
+        getChessPieces().stream()
+                .sorted(Comparator.comparingInt(p -> p.getCoords().x))
+                .forEach(chessPiece -> rows.add(chessPiece.getCoords().y));
+        final int freeCols = 8 - rows.size();
+        for (int i = 0; i < freeCols; i++) {
+            rows.add(0);
+        }
+        return rows.stream().mapToInt(x -> x).toArray();
     }
 }
